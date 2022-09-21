@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32804.467
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0C841556-F8D1-43C7-BAF0-B2F9C2493332}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.Domain", "Core\MiniTrade.Domain\MiniTrade.Domain.csproj", "{F2736238-71AA-4591-9978-6A5581D4C967}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.Application", "Core\MiniTrade.Application\MiniTrade.Application.csproj", "{5D276860-C555-4614-B0F7-22D2F565E59E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infastructures", "Infastructures", "{292E0AD7-EE06-4B2C-8249-B2AA114ABF50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.Infastructures", "Infasturctures\MiniTrade.Infastructures\MiniTrade.Infastructures.csproj", "{2C953654-6588-4718-974A-87DE74F9CA74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.Persistence", "Infasturctures\MiniTrade.Persistence\MiniTrade.Persistence.csproj", "{FC891286-0C87-4070-9650-FF3536E807E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A5851D54-98A0-489C-BBF9-514085EB29C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.API", "Presentation\MiniTrade.API\MiniTrade.API.csproj", "{67ECFAC1-7CB5-4232-83DF-8C84899492B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2736238-71AA-4591-9978-6A5581D4C967}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2736238-71AA-4591-9978-6A5581D4C967}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2736238-71AA-4591-9978-6A5581D4C967}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2736238-71AA-4591-9978-6A5581D4C967}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D276860-C555-4614-B0F7-22D2F565E59E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D276860-C555-4614-B0F7-22D2F565E59E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D276860-C555-4614-B0F7-22D2F565E59E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D276860-C555-4614-B0F7-22D2F565E59E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C953654-6588-4718-974A-87DE74F9CA74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C953654-6588-4718-974A-87DE74F9CA74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C953654-6588-4718-974A-87DE74F9CA74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C953654-6588-4718-974A-87DE74F9CA74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC891286-0C87-4070-9650-FF3536E807E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC891286-0C87-4070-9650-FF3536E807E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC891286-0C87-4070-9650-FF3536E807E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC891286-0C87-4070-9650-FF3536E807E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67ECFAC1-7CB5-4232-83DF-8C84899492B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67ECFAC1-7CB5-4232-83DF-8C84899492B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67ECFAC1-7CB5-4232-83DF-8C84899492B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67ECFAC1-7CB5-4232-83DF-8C84899492B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F2736238-71AA-4591-9978-6A5581D4C967} = {0C841556-F8D1-43C7-BAF0-B2F9C2493332}
+		{5D276860-C555-4614-B0F7-22D2F565E59E} = {0C841556-F8D1-43C7-BAF0-B2F9C2493332}
+		{2C953654-6588-4718-974A-87DE74F9CA74} = {292E0AD7-EE06-4B2C-8249-B2AA114ABF50}
+		{FC891286-0C87-4070-9650-FF3536E807E8} = {292E0AD7-EE06-4B2C-8249-B2AA114ABF50}
+		{67ECFAC1-7CB5-4232-83DF-8C84899492B9} = {A5851D54-98A0-489C-BBF9-514085EB29C6}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CB38269-6364-4753-9DFB-7F6C3D3DA4EF}
+	EndGlobalSection
+EndGlobal
