@@ -5,19 +5,19 @@ VisualStudioVersion = 17.3.32804.467
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0C841556-F8D1-43C7-BAF0-B2F9C2493332}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.Domain", "Core\MiniTrade.Domain\MiniTrade.Domain.csproj", "{F2736238-71AA-4591-9978-6A5581D4C967}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniTrade.Domain", "Core\MiniTrade.Domain\MiniTrade.Domain.csproj", "{F2736238-71AA-4591-9978-6A5581D4C967}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.Application", "Core\MiniTrade.Application\MiniTrade.Application.csproj", "{5D276860-C555-4614-B0F7-22D2F565E59E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniTrade.Application", "Core\MiniTrade.Application\MiniTrade.Application.csproj", "{5D276860-C555-4614-B0F7-22D2F565E59E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infastructures", "Infastructures", "{292E0AD7-EE06-4B2C-8249-B2AA114ABF50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.Infastructures", "Infasturctures\MiniTrade.Infastructures\MiniTrade.Infastructures.csproj", "{2C953654-6588-4718-974A-87DE74F9CA74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniTrade.Infastructures", "Infasturctures\MiniTrade.Infastructures\MiniTrade.Infastructures.csproj", "{2C953654-6588-4718-974A-87DE74F9CA74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.Persistence", "Infasturctures\MiniTrade.Persistence\MiniTrade.Persistence.csproj", "{FC891286-0C87-4070-9650-FF3536E807E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniTrade.Persistence", "Infasturctures\MiniTrade.Persistence\MiniTrade.Persistence.csproj", "{FC891286-0C87-4070-9650-FF3536E807E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{A5851D54-98A0-489C-BBF9-514085EB29C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniTrade.API", "Presentation\MiniTrade.API\MiniTrade.API.csproj", "{67ECFAC1-7CB5-4232-83DF-8C84899492B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniTrade.API", "Presentation\MiniTrade.API\MiniTrade.API.csproj", "{67ECFAC1-7CB5-4232-83DF-8C84899492B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

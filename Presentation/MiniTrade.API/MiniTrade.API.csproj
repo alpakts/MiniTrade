@@ -20,7 +20,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\MiniTrade.Application\MiniTrade.Application.csproj" />
+    <ProjectReference Include="..\..\Infasturctures\MiniTrade.Infastructures\MiniTrade.Infastructures.csproj" />
     <ProjectReference Include="..\..\Infasturctures\MiniTrade.Persistence\MiniTrade.Persistence.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
 </Project>

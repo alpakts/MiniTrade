@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using MiniTrade.Domain.Entities;
 using MiniTrade.Domain.Entities.Common;
 using System;
@@ -24,7 +24,7 @@ namespace MiniTrade.Persistence.Contexts
             var datas=ChangeTracker.Entries<BaseEntity>();
             foreach (var data in datas)
             {
-                // discard yapılanması ile geri dönüşü kapatır
+                // discard yapılanması ile geri dönüşü kapatır '_' ile kullanılır
                 _ = data.State switch
                 {
                     EntityState.Added => data.Entity.CreateDate = DateTime.UtcNow,
