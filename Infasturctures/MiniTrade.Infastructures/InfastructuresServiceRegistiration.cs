@@ -14,7 +14,7 @@ namespace MiniTrade.Infastructures
     public static void AddInfastructuresServices(this IServiceCollection services)
     {
       services.AddScoped<IFileService, FileService>();
-      return services;
+      
     }
   }
 }

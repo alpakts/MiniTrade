@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MiniTrade.Infastructures.StaticServices
 {
-  public static class NameService
+  public static class RenameHelper
   {
     public static string RenameFile(string name)
     {
