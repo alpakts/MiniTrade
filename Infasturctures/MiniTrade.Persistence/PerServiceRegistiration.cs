@@ -1,8 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MiniTrade.Application.Repositories;
+using MiniTrade.Application.Repositories.File;
+using MiniTrade.Application.Repositories.File.InvoiceFiles;
 using MiniTrade.Persistence.Contexts;
 using MiniTrade.Persistence.Repositories;
+using MiniTrade.Persistence.Repositories.FileRepositories;
+using MiniTrade.Persistence.Repositories.FileRepositories.InvoiceFileRepositores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +28,14 @@ namespace MiniTrade.Persistence
             services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
             services.AddScoped<IOrderReadRepository, OrderReadRepository>();
             services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+            services.AddScoped<IProductReadRepository, ProductReadRepository>();
+            services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+            services.AddScoped<IFileWriteRepository, FileWriteRepository>();
+            services.AddScoped<IFileReadRepository, FileReadRepository>();
+            services.AddScoped<IInvoiceReadRepository, InvoiceFileReadRepository>();
+            services.AddScoped<IInvoiceWriteRepository, InvoiceFileWriteRepository>();
 
-        }
+
+    }
     }
 }

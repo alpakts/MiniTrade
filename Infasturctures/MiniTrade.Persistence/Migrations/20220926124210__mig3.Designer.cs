@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniTrade.Persistence.Contexts;
 
@@ -11,9 +12,10 @@ using MiniTrade.Persistence.Contexts;
 namespace MiniTrade.Persistence.Migrations
 {
     [DbContext(typeof(MiniTradeAPIDbContext))]
-    partial class MiniTradeAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220926124210__mig3")]
+    partial class _mig3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

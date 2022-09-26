@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MiniTrade.Application.Repositories;
-using MiniTrade.Application.Services.FileServicee;
+using MiniTrade.Application.Repositories.File.ProductImages;
+using MiniTrade.Application.Services.Storage;
 using MiniTrade.Application.ViewModels.Products;
 using MiniTrade.Domain.Entities;
+using MiniTrade.Infastructures.Services.FileService;
 using System.Net;
 
 namespace MiniTrade.API.Controllers
@@ -15,20 +17,33 @@ namespace MiniTrade.API.Controllers
     private readonly IProductWriteRepository _productWrite;
     private readonly IProductReadRepository _productRead;
     private readonly IWebHostEnvironment _webHostEnvironment;
-    private readonly IFileService _fileService;
+    private readonly IProductImageWriteRepository _productImageWriteRepository;
+    private readonly IProductImageReadRepository _productImageReadRepository;
+    private readonly IStorageService _storageService;
 
-    public ProductsController(IProductWriteRepository productWrite, IProductReadRepository productRead,IWebHostEnvironment webHostEnvironment,IFileService fileService)
+ 
+
+    public ProductsController(IProductWriteRepository productWrite,
+      IStorageService storage,
+      IProductReadRepository productRead,
+      IWebHostEnvironment webHostEnvironment,
+      IProductImageWriteRepository productImageWriteRepository,
+      IProductImageReadRepository productImageReadRepository)
+      
     {
       _productWrite = productWrite;
       _productRead = productRead;
       _webHostEnvironment = webHostEnvironment;
-      _fileService = fileService;
+
+      _productImageWriteRepository = productImageWriteRepository;
+      _productImageReadRepository = productImageReadRepository;
+      _storageService = storage;
     }
     [HttpGet("get")]
     public async Task<IActionResult> Get()
     {
 
-      return Ok(_productRead.GetAll(false));
+      return  Ok(_productRead.GetAll(false));
     }
     [HttpGet("getid")]
     public async Task<IActionResult> getById(string id)
@@ -71,10 +86,12 @@ namespace MiniTrade.API.Controllers
     [HttpPost("[action]")]
     public async Task<IActionResult> Upload()
     {
-      await _fileService.UploadAsync("resource/product-images", Request.Form.Files);
+      var datas =await _storageService.UploadAsync("resource/files",Request.Form.Files);
+      await _productImageWriteRepository.AddRangeAsync(datas.Select(d=>new ProductImage{
+        FileName=d.fileName,Path=d.filePath,StorageType=_storageService.StorageName}).ToList());
+      //var datas = await _fileService.UploadAsync("resource/product-images", Request.Form.Files);
+    //  await _productImageWriteRepository.AddRangeAsync(datas.Select(d => new ProductImage { FileName = d.fileName, Path = d.filePath }).ToList());
       return Ok();
-    }
-
-
+    } 
   }
 }

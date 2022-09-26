@@ -1,4 +1,4 @@
-﻿using MiniTrade.Domain.Entities;
+using MiniTrade.Domain.Entities;
 using MiniTrade.Domain.Entities.Common;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace MiniTrade.Application.ViewModels.Products
         public string Name { get; set; }
         public int Stock { get; set; }
         public float Price { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        
 
     }
 }

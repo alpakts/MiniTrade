@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using MiniTrade.Application.Services.LocalStorage;
 using MiniTrade.Application.Validators.Products;
 using MiniTrade.Infastructures;
 using MiniTrade.Infastructures.Filters;
@@ -6,6 +7,9 @@ using MiniTrade.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//Generik Storage Altyapısı servisi dahil etme( Generic StorageService Registiration)
+//builder.Services.AddStorage<LocalStorage>();
+builder.Services.AddStorage(MiniTrade.Infastructures.Enums.StorageTypes.Azure);
 // Add services to the container.
 builder.Services.AddControllers(options=>options.Filters.Add<ValidationFilter>()).
   AddFluentValidation(config => config.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>()).
