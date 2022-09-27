@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MiniTrade.Application.Repositories;
 using MiniTrade.Application.Repositories.File.ProductImages;
 using MiniTrade.Application.Services.Storage;
@@ -86,12 +87,31 @@ namespace MiniTrade.API.Controllers
     [HttpPost("[action]")]
     public async Task<IActionResult> Upload()
     {
-      var datas =await _storageService.UploadAsync("resource/files",Request.Form.Files);
-      await _productImageWriteRepository.AddRangeAsync(datas.Select(d=>new ProductImage{
-        FileName=d.fileName,Path=d.filePath,StorageType=_storageService.StorageName}).ToList());
-      //var datas = await _fileService.UploadAsync("resource/product-images", Request.Form.Files);
-    //  await _productImageWriteRepository.AddRangeAsync(datas.Select(d => new ProductImage { FileName = d.fileName, Path = d.filePath }).ToList());
-      return Ok();
-    } 
+      var result = await _storageService.UploadAsync("Products",Request.Form.Files);
+      await _productImageWriteRepository.AddRangeAsync(result.Select(f => new ProductImage
+      {
+        FileName = f.fileName,
+        Path = f.filePath,
+        StorageType=_storageService.StorageName
+      }).ToList());
+      await _productImageWriteRepository.SaveAsync();
+      return Ok(result);
+    }
+    [HttpGet("[action]/{id}")]
+    public async Task<IActionResult> GetImages(string id)
+    {
+      Product? product= await _productRead.Table.Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == Guid.Parse(id));
+      return Ok(product?.Images.Select(p=>new {p.Path,p.FileName,p.Id}));
+    }
+    [HttpDelete("[action]/{productId}")]
+    public async Task<IActionResult> DeleteImage(string productId, string imageId)
+    {
+      Product? product = await _productRead.Table.Include(p => p.Images).FirstOrDefaultAsync(p => p.Id == Guid.Parse(productId));
+      var image =  product?.Images.FirstOrDefault(p => p.Id == Guid.Parse(imageId));
+      await _productImageWriteRepository.RemoveAsync(image.Id.ToString());
+      await _productImageWriteRepository.SaveAsync();
+      return Accepted();
+    }
   }
+
 }
