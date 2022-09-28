@@ -6,9 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static MiniTrade.Application.Features.Queries.GetAllProduct.GetAllProductQueryRequest;
+using static MiniTrade.Application.Features.Queries.Product.GetAllProductQueryRequest;
 
-namespace MiniTrade.Application.Features.Queries.GetAllProduct
+namespace MiniTrade.Application.Features.Queries.Product
 {
   public class GetAllProductQueryRequest : IRequest<GetAllProductQueryResponse>
   {
@@ -32,7 +32,7 @@ namespace MiniTrade.Application.Features.Queries.GetAllProduct
           p.Price,
           p.CreateDate,
           p.UpdateDate
-          
+
 
         }).ToList();
 
