@@ -24,6 +24,23 @@ namespace MiniTrade.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Files",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Path = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StorageType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CreateDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Files", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -63,6 +80,30 @@ namespace MiniTrade.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProductProductImage",
+                columns: table => new
+                {
+                    ImagesId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductProductImage", x => new { x.ImagesId, x.ProductsId });
+                    table.ForeignKey(
+                        name: "FK_ProductProductImage_Files_ImagesId",
+                        column: x => x.ImagesId,
+                        principalTable: "Files",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductProductImage_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OrderProduct",
                 columns: table => new
                 {
@@ -95,6 +136,11 @@ namespace MiniTrade.Persistence.Migrations
                 name: "IX_Orders_CustomerId1",
                 table: "Orders",
                 column: "CustomerId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductProductImage_ProductsId",
+                table: "ProductProductImage",
+                column: "ProductsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -103,7 +149,13 @@ namespace MiniTrade.Persistence.Migrations
                 name: "OrderProduct");
 
             migrationBuilder.DropTable(
+                name: "ProductProductImage");
+
+            migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Files");
 
             migrationBuilder.DropTable(
                 name: "Products");

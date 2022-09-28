@@ -2,7 +2,8 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using MiniTrade.Application.Services.Storage.Azure;
+using MiniTrade.Application.Abstractions.Storage.Azure;
+
 
 namespace MiniTrade.Infastructures.Services.Storage.Azure
 {

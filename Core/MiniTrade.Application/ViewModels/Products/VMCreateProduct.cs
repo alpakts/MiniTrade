@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MiniTrade.Application.ViewModels.Products
 {
-    public class VMCreateProduct:BaseEntity
+    public class VMCreateProduct
     {
         public string Name { get; set; }
         public int Stock { get; set; }

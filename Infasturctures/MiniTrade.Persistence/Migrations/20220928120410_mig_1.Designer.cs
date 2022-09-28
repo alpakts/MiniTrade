@@ -12,14 +12,14 @@ using MiniTrade.Persistence.Contexts;
 namespace MiniTrade.Persistence.Migrations
 {
     [DbContext(typeof(MiniTradeAPIDbContext))]
-    [Migration("20220927105941_mig_4")]
-    partial class mig_4
+    [Migration("20220928120410_mig_1")]
+    partial class mig_1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.8")
+                .HasAnnotation("ProductVersion", "6.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);

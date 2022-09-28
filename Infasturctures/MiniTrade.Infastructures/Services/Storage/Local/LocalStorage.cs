@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using MiniTrade.Application.Abstractions.Storage.Local;
-using MiniTrade.Application.Services.LocalStorage;
-using ILocalStorage = MiniTrade.Application.Services.LocalStorage.ILocalStorage;
 
 namespace MiniTrade.Infastructures.Services.Storage.Local
 {
-  public class LocalStorage :Infastructures.Services.Storage.Storage, ILocalStorage
+  public class LocalStorage :Storage, ILocalStorage
   {
     private readonly IWebHostEnvironment _webHost;
 

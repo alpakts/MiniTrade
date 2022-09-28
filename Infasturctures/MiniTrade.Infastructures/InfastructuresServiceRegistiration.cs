@@ -1,7 +1,7 @@
 
 
 using Microsoft.Extensions.DependencyInjection;
-using MiniTrade.Application.Services;
+using MiniTrade.Application.Abstractions.Storage;
 using MiniTrade.Infastructures.Enums;
 using MiniTrade.Infastructures.Services.Storage;
 using MiniTrade.Infastructures.Services.Storage.Azure;
@@ -11,28 +11,29 @@ namespace MiniTrade.Infastructures
 {
   public static class InfastructuresServiceRegistiration
   {
-    public static void AddInfastructuresServices(this IServiceCollection services)
+    public static void AddInfrastructureServices(this IServiceCollection serviceCollection)
     {
-
+      serviceCollection.AddScoped<IStorageService, StorageService>();
     }
-    public static void AddStorage<T>(this IServiceCollection services) where T : Storage, IStorage
+    public static void AddStorage<T>(this IServiceCollection serviceCollection) where T : Storage, IStorage
     {
-      services.AddScoped<IStorage, T>();
+      serviceCollection.AddScoped<IStorage, T>();
     }
-    public static void AddStorage(this IServiceCollection serviceDescriptors, StorageTypes storageTypes)
+    public static void AddStorage(this IServiceCollection serviceCollection, StorageTypes storageType)
     {
-      switch (storageTypes)
+      switch (storageType)
       {
         case StorageTypes.Local:
-          serviceDescriptors.AddScoped<IStorage, LocalStorage>();
+          serviceCollection.AddScoped<IStorage, LocalStorage>();
           break;
         case StorageTypes.Azure:
-          serviceDescriptors.AddScoped<IStorage, AzureStorage>();
+          serviceCollection.AddScoped<IStorage, AzureStorage>();
           break;
         case StorageTypes.AWS:
+
           break;
         default:
-          serviceDescriptors.AddScoped<IStorage, LocalStorage>();
+          serviceCollection.AddScoped<IStorage, LocalStorage>();
           break;
       }
     }

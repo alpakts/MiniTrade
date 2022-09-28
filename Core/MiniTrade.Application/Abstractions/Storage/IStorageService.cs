@@ -1,16 +1,13 @@
-using MiniTrade.Application.Abstractions.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniTrade.Application.Services.Storage
+namespace MiniTrade.Application.Abstractions.Storage
 {
-  public interface IStorageService : Abstractions.Storage.IStorage
+  public interface IStorageService : IStorage
   {
     public string StorageName { get; }
-
-
   }
 }

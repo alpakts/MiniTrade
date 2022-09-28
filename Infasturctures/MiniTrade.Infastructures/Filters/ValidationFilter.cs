@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniTrade.Infastructures.Filters
+namespace ETicaretAPI.Infrastructure.Filters
 {
   public class ValidationFilter : IAsyncActionFilter
   {
@@ -14,14 +14,16 @@ namespace MiniTrade.Infastructures.Filters
     {
       if (!context.ModelState.IsValid)
       {
-         var errors = context.ModelState.Where(e => e.Value.Errors.Any()).
-          ToDictionary(e => e.Key, e => e.Value.Errors.Select(e => e.ErrorMessage)).ToList();
-        context.Result=new BadRequestObjectResult(errors);
+        var errors = context.ModelState
+               .Where(x => x.Value.Errors.Any())
+               .ToDictionary(e => e.Key, e => e.Value.Errors.Select(e => e.ErrorMessage))
+               .ToArray();
+
+        context.Result = new BadRequestObjectResult(errors);
         return;
-      } 
+      }
+
       await next();
-      
-        
     }
   }
 }

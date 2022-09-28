@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Http;
-using MiniTrade.Application.Services;
-using MiniTrade.Application.Services.Storage;
+using MiniTrade.Application.Abstractions.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +11,9 @@ namespace MiniTrade.Infastructures.Services.Storage
 
     public class StorageService : IStorageService
   {
-    readonly IStorageService _storage;
+    readonly IStorage _storage;
 
-    public StorageService(IStorageService storage)
+    public StorageService(IStorage storage)
     {
       _storage = storage;
     }
