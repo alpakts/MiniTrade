@@ -14,8 +14,8 @@ namespace MiniTrade.Application.Features.Commands.Product.ProductImages
 {
   public  class ProductImageUploadCommandRequest:IRequest<ProductImageUploadCommandResponse>
   {
-    public string Id { get; set; }
-    public IFormFileCollection FormFileCollection { get; set; }
+    public string? Id { get; set; }
+    public IFormFileCollection? FormFileCollection { get; set; }
     public class ProductImageUploadCommandHandler : IRequestHandler<ProductImageUploadCommandRequest, ProductImageUploadCommandResponse>
     {
       IProductImageWriteRepository _productImageWriteRepository;
@@ -46,6 +46,7 @@ namespace MiniTrade.Application.Features.Commands.Product.ProductImages
         }).ToList());
 
         await _productImageWriteRepository.SaveAsync();
+        return new();
 
       }
     }

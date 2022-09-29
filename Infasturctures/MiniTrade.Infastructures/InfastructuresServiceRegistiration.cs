@@ -1,7 +1,9 @@
 
 
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using MiniTrade.Application.Abstractions.Storage;
+using MiniTrade.Application.Abstractions.Token;
 using MiniTrade.Infastructures.Enums;
 using MiniTrade.Infastructures.Services.Storage;
 using MiniTrade.Infastructures.Services.Storage.Azure;
@@ -14,6 +16,8 @@ namespace MiniTrade.Infastructures
     public static void AddInfrastructureServices(this IServiceCollection serviceCollection)
     {
       serviceCollection.AddScoped<IStorageService, StorageService>();
+      serviceCollection.AddScoped<ITokenHandler, Services.Token.TokenHandler>();
+        
     }
     public static void AddStorage<T>(this IServiceCollection serviceCollection) where T : Storage, IStorage
     {

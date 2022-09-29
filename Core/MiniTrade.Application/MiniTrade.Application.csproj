@@ -21,4 +21,8 @@
     <ProjectReference Include="..\MiniTrade.Domain\MiniTrade.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Queries\Users\" />
+  </ItemGroup>
+
 </Project>

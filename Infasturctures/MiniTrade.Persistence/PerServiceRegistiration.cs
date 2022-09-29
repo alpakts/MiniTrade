@@ -4,6 +4,7 @@ using MiniTrade.Application.Repositories;
 using MiniTrade.Application.Repositories.File;
 using MiniTrade.Application.Repositories.File.InvoiceFiles;
 using MiniTrade.Application.Repositories.File.ProductImages;
+using MiniTrade.Domain.Entities.Identity;
 using MiniTrade.Persistence.Contexts;
 using MiniTrade.Persistence.Repositories;
 using MiniTrade.Persistence.Repositories.FileRepositories;
@@ -23,6 +24,7 @@ namespace MiniTrade.Persistence
     public static void AddPersistenceServices(this IServiceCollection services)
     {
       services.AddDbContext<MiniTradeAPIDbContext>(options => options.UseSqlServer(Configuration.ConnectionString));
+      services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<MiniTradeAPIDbContext>();
       services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
       services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
       services.AddScoped<IOrderReadRepository, OrderReadRepository>();

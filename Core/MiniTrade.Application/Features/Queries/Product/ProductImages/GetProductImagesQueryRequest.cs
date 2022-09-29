@@ -8,11 +8,11 @@ using MiniTrade.Application.Repositories;
 
 namespace MiniTrade.Application.Features.Queries.Product.ProductImages
 {
-  public class GetProductImagesQueryRequest : IRequest<List<GetProductImagesQueryRequest>>
+  public class GetProductImagesQueryRequest : IRequest<List<GetProductImagesQueryResponse>>
   {
     public string Id { get; set; }
 
-    public class GetPRoductImagesQueryHandler : IRequestHandler<GetProductImagesQueryRequest, <List<GetProductImagesQueryResponse>>
+    public class GetPRoductImagesQueryHandler : IRequestHandler<GetProductImagesQueryRequest, List<GetProductImagesQueryResponse>>
     {
       private readonly IProductReadRepository _productReadRepository;
       private readonly IConfiguration configuration;
@@ -40,11 +40,12 @@ namespace MiniTrade.Application.Features.Queries.Product.ProductImages
         }
         return new();      }
     }
-    public class GetProductImagesQueryResponse
-    {
-      public Guid? Id { get; set; }
-      public string? Path { get; set; }
-      public string? FileName { get; set; }
-    }
+   
+  }
+  public class GetProductImagesQueryResponse
+  {
+    public Guid? Id { get; set; }
+    public string? Path { get; set; }
+    public string? FileName { get; set; }
   }
 }

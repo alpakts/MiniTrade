@@ -1,23 +1,18 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using MiniTrade.Application.Abstractions.Storage;
 using MiniTrade.Application.Features.Commands.Product;
 using MiniTrade.Application.Features.Commands.Product.ProductImages;
 using MiniTrade.Application.Features.Queries.Product;
 using MiniTrade.Application.Features.Queries.Product.ProductImages;
-using MiniTrade.Application.Repositories;
-using MiniTrade.Application.Repositories.File;
-using MiniTrade.Application.Repositories.File.InvoiceFiles;
-using MiniTrade.Application.Repositories.File.ProductImages;
-using MiniTrade.Application.ViewModels.Products;
-using MiniTrade.Domain.Entities;
+
 using System.Net;
 
 namespace MiniTrade.API.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
+  [Authorize(AuthenticationSchemes="admin")]
   public class ProductsController : ControllerBase
   {
     readonly IMediator _mediator;
@@ -69,7 +64,7 @@ namespace MiniTrade.API.Controllers
       return Ok(response);
     }
     [HttpPost("[action]")]
-    public async Task<IActionResult> Upload([FromQuery] ProductImageUploadCommandRequest productImageUploadCommandRequest)
+    public async Task<IActionResult> Upload([FromQuery] ProductImageUploadCommandRequest productImageUploadCommandRequest )
     {
       productImageUploadCommandRequest.FormFileCollection = Request.Form.Files;
       var response = await _mediator.Send(productImageUploadCommandRequest);
@@ -89,6 +84,8 @@ namespace MiniTrade.API.Controllers
       var response = _mediator.Send(deleteProductImageCommandRequest);
       return Ok(response);
     }
+
   }
+  
 
 }

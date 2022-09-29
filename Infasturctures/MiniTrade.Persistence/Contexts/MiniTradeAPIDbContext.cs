@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using MiniTrade.Domain.Entities;
 using MiniTrade.Domain.Entities.Common;
+using MiniTrade.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MiniTrade.Persistence.Contexts
 {
-  public class MiniTradeAPIDbContext : DbContext
+  public class MiniTradeAPIDbContext : IdentityDbContext<AppUser,AppRole,string>
   {
     public MiniTradeAPIDbContext(DbContextOptions options) : base(options)
     { }
