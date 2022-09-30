@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MiniTrade.Application.Features.Commands.User;
 using MiniTrade.Application.Features.Commands.Users;
 
 namespace MiniTrade.API.Controllers
@@ -25,6 +26,18 @@ namespace MiniTrade.API.Controllers
     public async Task<IActionResult> Login(LoginCommandRequest request)
     {
       var response=await _mediator.Send(request);
+      return Ok(response);
+    }
+    [HttpPost("[action]")]
+    public async Task<IActionResult> LoginWithGoogle(LoginWithGoogleCommandRequest request)
+    {
+      var response=await _mediator.Send(request);
+      return Ok(response);
+    }
+    [HttpPost("[action]")]
+    public async Task<IActionResult> LoginWithFacebook(LoginWithFacebookCommandRequest request)
+    {
+      var response = await _mediator.Send(request);
       return Ok(response);
     }
   }

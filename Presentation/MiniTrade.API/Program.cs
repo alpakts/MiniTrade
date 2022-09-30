@@ -20,7 +20,6 @@ builder.Services.AddStorage<AzureStorage>();
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("https://localhost:4200",
   "http://localhost:4200/").AllowAnyHeader().AllowAnyMethod()));
 
-
 builder.Services.AddControllers(options => options.Filters.Add<ValidationFilter>())
     .AddFluentValidation(configuration => configuration.RegisterValidatorsFromAssemblyContaining<CreateProductValidator>())
     .ConfigureApiBehaviorOptions(options => options.SuppressModelStateInvalidFilter = true);

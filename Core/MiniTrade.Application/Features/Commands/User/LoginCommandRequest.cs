@@ -1,4 +1,4 @@
-using MediatR;
+ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using MiniTrade.Application.Abstractions.Token;
 using MiniTrade.Domain.Entities.Identity;

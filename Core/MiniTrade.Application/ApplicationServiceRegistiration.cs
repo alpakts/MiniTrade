@@ -13,6 +13,7 @@ namespace MiniTrade.Application
     public static void AddApplicationServices(this IServiceCollection collection)
     {
       collection.AddMediatR(typeof(ApplicationServiceRegistiration));
+      collection.AddHttpClient();
     }
   }
 }
