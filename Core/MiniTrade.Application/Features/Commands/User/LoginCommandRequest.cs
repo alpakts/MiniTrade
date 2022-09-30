@@ -1,12 +1,7 @@
  using MediatR;
-using Microsoft.AspNetCore.Identity;
+using MiniTrade.Application.Abstractions.Services.User.Authentication;
 using MiniTrade.Application.Abstractions.Token;
-using MiniTrade.Domain.Entities.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace MiniTrade.Application.Features.Commands.Users
 {
@@ -18,36 +13,19 @@ namespace MiniTrade.Application.Features.Commands.Users
 
     public class LoginCommandHandler : IRequestHandler<LoginCommandRequest, LoginCommandResponse>
     {
-      private readonly ITokenHandler _tokenHandler;
-      private readonly UserManager<AppUser> _userManager;
-      private readonly SignInManager<AppUser> _signInManager;
+      IInternalAuthService _authService;
 
-      public LoginCommandHandler(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ITokenHandler tokenHandler)
+      public LoginCommandHandler(IInternalAuthService authService)
       {
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _tokenHandler = tokenHandler;
+        _authService = authService;
       }
 
       public async Task<LoginCommandResponse> Handle(LoginCommandRequest request, CancellationToken cancellationToken)
       {
-        AppUser user=await _userManager.FindByNameAsync(request.UserNameOrEmail);
-        if (user == null)
-          user= await _userManager.FindByEmailAsync(request.UserNameOrEmail);
-        if (user == null) throw new Exception("kullanıcı adı yada şifre hatalı");
-        
-        var result=await _signInManager.CheckPasswordSignInAsync(user, request.Password,false);
-        if (result.Succeeded)// authentication başarılı 
+        Token token=await _authService.LoginAsync(request.UserNameOrEmail, request.Password, 60);
+        return new LoginCommandSuccessResponse()
         {
-          var Token=_tokenHandler.CreateAccessToken(15);
-          return  new LoginCommandSuccessResponse()
-          {
-            Token = Token
-          };
-        }
-        return new LoginCommandErrorResponse()
-        {
-          Message = "Kullanıcı adı ya da şifre hatalı"
+          Token = token
         };
        
       }

@@ -16,7 +16,7 @@ namespace MiniTrade.Infastructures.Services.Token
       this.configuration = configuration;
     }
 
-    public Application.Abstractions.Token.Token CreateAccessToken(int minute)
+    public Application.Abstractions.Token.Token CreateAccessToken(int second)
     {
       Application.Abstractions.Token.Token token = new();
       ///Security key simetriği alınıyor
@@ -24,7 +24,7 @@ namespace MiniTrade.Infastructures.Services.Token
       //şifrelenmiş kimliği oluşturuyoruz
       SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
       // oluşturulacak token ayarlarını veriyoruz
-      token.Expiraton = DateTime.Now.AddMinutes(minute);
+      token.Expiraton = DateTime.Now.AddSeconds(second);
       JwtSecurityToken jwtToken = new(
         audience: configuration["JWT:Audience"],
         issuer: configuration["JWT:Issuer"],

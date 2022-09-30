@@ -1,5 +1,8 @@
+using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using MiniTrade.Application.Abstractions.Services.User;
+using MiniTrade.Application.Dtos.User;
 using MiniTrade.Domain.Entities.Identity;
 using MiniTrade.Domain.Exceptions;
 using System;
@@ -20,39 +23,22 @@ namespace MiniTrade.Application.Features.Commands.Users
 
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
     {
-      private readonly UserManager<AppUser> _userManager;
 
-      public CreateUserCommandHandler(UserManager<AppUser> userManager)
+      private readonly IUserService _userService;
+      private readonly IMapper _mapper;
+
+      public CreateUserCommandHandler(IUserService userService, IMapper mapper)
       {
-        _userManager = userManager;
+        _userService = userService;
+        _mapper = mapper;
       }
 
       public async Task<CreateUserCommandResponse> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
       {
-        var result=await _userManager.CreateAsync(new AppUser()
-        {
-          Id=Guid.NewGuid().ToString(),
-          Email=request.Email,
-          UserName=request.UserName,
-          NameSurname=request.NameSurname,
-
-          
-        },request.Password);
-        if (result.Succeeded)
-        {
-          return new()
-          {
-            Message = "Kullanıcı başarıyla oluşturuldu",
-            Succeeded = result.Succeeded
-          };
-        
-        }
-        return new()
-        {
-          Succeeded = result.Succeeded,
-          Message = "Kullanıcı oluşturulurken bir hatayla karşılaşıldı",
-          Errors = result.Errors.ToString()
-        };
+        CreateUser createUser=_mapper.Map<CreateUserCommandRequest,CreateUser >(request);
+        CreateUserResponse createdUser = await _userService.CreateAsycn(createUser);
+        CreateUserCommandResponse response= _mapper.Map<CreateUserResponse,CreateUserCommandResponse>(createdUser) ;
+        return response;
       }
     }
     

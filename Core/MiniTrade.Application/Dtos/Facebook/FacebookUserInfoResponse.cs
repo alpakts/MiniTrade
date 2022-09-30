@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MiniTrade.Application.Dtos.Facebook
 {
-  internal class FacebookUserInfoResponse
+  public class FacebookUserInfoResponse
   {
     [JsonProperty("id")]
     public string? Id { get; set; }

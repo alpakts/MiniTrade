@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MiniTrade.Application.Abstractions.Services.User;
+using MiniTrade.Application.Abstractions.Services.User.Authentication;
 using MiniTrade.Application.Repositories;
 using MiniTrade.Application.Repositories.File;
 using MiniTrade.Application.Repositories.File.InvoiceFiles;
@@ -10,6 +12,7 @@ using MiniTrade.Persistence.Repositories;
 using MiniTrade.Persistence.Repositories.FileRepositories;
 using MiniTrade.Persistence.Repositories.FileRepositories.InvoiceFileRepositores;
 using MiniTrade.Persistence.Repositories.FileRepositories.ProductImageRepositories;
+using MiniTrade.Persistence.Services.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +40,10 @@ namespace MiniTrade.Persistence
       services.AddScoped<IProductImageWriteRepository, ProductImageWriteRepository>();
       services.AddScoped<IInvoiceReadRepository,InvoiceFileReadRepository>();
       services.AddScoped<IInvoiceWriteRepository, InvoiceFileWriteRepository>();
+      services.AddScoped<IUserService, IUserService>();
+      services.AddScoped<IAuthService, AuthService>();
+      services.AddScoped<IExternalAuthService, AuthService>();
+      services.AddScoped<IInternalAuthService, AuthService>();
     }
   }
 }
