@@ -1,7 +1,9 @@
 using Google.Apis.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using MiniTrade.Application.Abstractions.Services.User;
 using MiniTrade.Application.Abstractions.Services.User.Authentication;
 using MiniTrade.Application.Abstractions.Token;
 using MiniTrade.Application.Dtos.Facebook;
@@ -20,17 +22,20 @@ namespace MiniTrade.Persistence.Services.User
     private readonly ITokenHandler _tokenHandler;
     private readonly IConfiguration _configuration;
     private readonly SignInManager<AppUser> _signInManager;
+    private readonly IUserService _userService;
     public AuthService(UserManager<AppUser> userManager,
       IHttpClientFactory httpClientFactory,
       ITokenHandler tokenHandler,
       IConfiguration configuration,
-      SignInManager<AppUser> signInManager)
+      SignInManager<AppUser> signInManager,
+      IUserService userService)
     {
       _userManager = userManager;
       _client = httpClientFactory.CreateClient();
       _tokenHandler = tokenHandler;
       _configuration = configuration;
       _signInManager = signInManager;
+      _userService = userService;
     }
     private async Task<Token> CreateExternalUserAsycn(AppUser user,string email,string name,UserLoginInfo Info,int accesTokenLifetime)
     {
@@ -75,8 +80,10 @@ namespace MiniTrade.Persistence.Services.User
       var payload = await GoogleJsonWebSignature.ValidateAsync(idToken, setting);
       var info = new UserLoginInfo(provider, payload.Scope, provider);
       var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
-      return await CreateExternalUserAsycn(user,payload.Email,payload.Name,info, accessTokenLifetime);
-      
+      var token= await CreateExternalUserAsycn(user,payload.Email,payload.Name,info, accessTokenLifetime);
+      await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiraton, 60);
+      return token;
+
 
     }
 
@@ -94,6 +101,7 @@ namespace MiniTrade.Persistence.Services.User
         UserLoginInfo info = new UserLoginInfo("FACEBOOK", tokenValidationInfo.Data.UserId, "FACEBOOK");
         var user = await _userManager.FindByEmailAsync(facebookUserInfoResponse?.Email);
         Token token = await CreateExternalUserAsycn(user, facebookUserInfoResponse?.Email, facebookUserInfoResponse?.Name, info, accesTokenLifetime);
+        await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiraton, 60);
         return token;
       }
       throw new Exception("İnvalid External Authentication");
@@ -102,17 +110,30 @@ namespace MiniTrade.Persistence.Services.User
     {
       AppUser user = await _userManager.FindByNameAsync(userNameOrEmail);
       if (user == null)
-        user = await _userManager.FindByEmailAsync(request.UserNameOrEmail);
+        user = await _userManager.FindByEmailAsync(userNameOrEmail);
       if (user == null) throw new Exception("kullanıcı adı yada şifre hatalı");
 
       var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
       if (result.Succeeded)// authentication başarılı 
       {
-        return  _tokenHandler.CreateAccessToken(accessTokenLifetime);
+        Token token=  _tokenHandler.CreateAccessToken(accessTokenLifetime);
+        await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiraton, 60);
+        return token;
       }
       throw new Exception("geçersiz kullanıcı");
     
     }
 
+    public async Task<Token> LoginWithRefreshTokenAsync(string refreshToken)
+    {
+      AppUser user = await _userManager.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
+      if (user!=null && user?.RefreshTokenExpiresAt>DateTime.Now)
+      {
+        Token token=_tokenHandler.CreateAccessToken(15);
+        await _userService.UpdateRefreshToken(token.RefreshToken,user,token.Expiraton,60);
+        return token;
+      }
+      throw new Exception("Kullanıcı bulunamadı");
+    }
   }
 }

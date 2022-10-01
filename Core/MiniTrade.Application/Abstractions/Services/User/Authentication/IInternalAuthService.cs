@@ -10,5 +10,6 @@ namespace MiniTrade.Application.Abstractions.Services.User.Authentication
   public interface IInternalAuthService
   {
     Task<Token.Token> LoginAsync(string userNameOrEmail,string password,int accessTokenLifetime);
+    Task<Token.Token> LoginWithRefreshTokenAsync(string refreshToken);
   }
 }

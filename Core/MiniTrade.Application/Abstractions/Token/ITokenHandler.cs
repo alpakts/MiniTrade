@@ -9,5 +9,6 @@ namespace MiniTrade.Application.Abstractions.Token
   public interface ITokenHandler
   {
     Token CreateAccessToken(int second);
+    string CreateRefreshToken();
   }
 }

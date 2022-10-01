@@ -48,5 +48,19 @@ namespace MiniTrade.Persistence.Services.User
         Errors = result.Errors.ToString()
       };
     }
+
+    public async Task UpdateRefreshToken(string refreshToken, AppUser user, DateTime AccesTokenExpiresAt, int refreshTokenLifetime)
+    {
+      if (user != null)
+      {
+        user.RefreshToken = refreshToken;
+        user.RefreshTokenExpiresAt = AccesTokenExpiresAt.AddSeconds(refreshTokenLifetime);
+        await _userManager.UpdateAsync(user);
+      } else
+        throw new Exception("BU id ile kayıtlı kullanıcı bulunamadı");
+      
+      
+      
+    }
   }
 }

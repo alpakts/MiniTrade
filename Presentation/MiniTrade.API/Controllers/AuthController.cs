@@ -35,5 +35,11 @@ namespace MiniTrade.API.Controllers
       var response = await _mediator.Send(request);
       return Ok(response);
     }
+    [HttpGet("[action]")]
+    public async Task<IActionResult> LoginWithRefreshToken([FromQuery] LoginWithRefreshTokenCommandRequest request)
+    {
+      var response =await  _mediator.Send(request);
+      return Ok(response);
+    }
   }
 }

@@ -10,5 +10,6 @@ namespace MiniTrade.Application.Abstractions.Token
   {
     public string? AccessToken { get; set; }
     public DateTime Expiraton { get; set; }
+    public string RefreshToken { get; set; }
   }
 }
