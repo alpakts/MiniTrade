@@ -40,7 +40,7 @@ namespace MiniTrade.Persistence
       services.AddScoped<IProductImageWriteRepository, ProductImageWriteRepository>();
       services.AddScoped<IInvoiceReadRepository,InvoiceFileReadRepository>();
       services.AddScoped<IInvoiceWriteRepository, InvoiceFileWriteRepository>();
-      services.AddScoped<IUserService, IUserService>();
+      services.AddScoped<IUserService, UserService>();
       services.AddScoped<IAuthService, AuthService>();
       services.AddScoped<IExternalAuthService, AuthService>();
       services.AddScoped<IInternalAuthService, AuthService>();

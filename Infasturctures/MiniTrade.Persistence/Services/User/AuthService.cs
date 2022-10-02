@@ -67,7 +67,7 @@ namespace MiniTrade.Persistence.Services.User
         throw new Exception("İnvalid External Authentication");
       }
       var token = new Token();
-      token = _tokenHandler.CreateAccessToken(15);
+      token = _tokenHandler.CreateAccessToken(15, user);
       return token;
     }
     public async Task<Token> GoogleLoginAsync(string idToken,string provider,int accessTokenLifetime)
@@ -116,7 +116,7 @@ namespace MiniTrade.Persistence.Services.User
       var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
       if (result.Succeeded)// authentication başarılı 
       {
-        Token token=  _tokenHandler.CreateAccessToken(accessTokenLifetime);
+        Token token=  _tokenHandler.CreateAccessToken(accessTokenLifetime, user);
         await _userService.UpdateRefreshToken(token.RefreshToken, user, token.Expiraton, 60);
         return token;
       }
@@ -129,7 +129,7 @@ namespace MiniTrade.Persistence.Services.User
       AppUser user = await _userManager.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
       if (user!=null && user?.RefreshTokenExpiresAt>DateTime.Now)
       {
-        Token token=_tokenHandler.CreateAccessToken(15);
+        Token token=_tokenHandler.CreateAccessToken(15, user);
         await _userService.UpdateRefreshToken(token.RefreshToken,user,token.Expiraton,60);
         return token;
       }

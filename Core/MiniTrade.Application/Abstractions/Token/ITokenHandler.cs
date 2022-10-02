@@ -1,3 +1,4 @@
+using MiniTrade.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace MiniTrade.Application.Abstractions.Token
 {
   public interface ITokenHandler
   {
-    Token CreateAccessToken(int second);
+    Token CreateAccessToken(int second, AppUser user);
     string CreateRefreshToken();
   }
 }

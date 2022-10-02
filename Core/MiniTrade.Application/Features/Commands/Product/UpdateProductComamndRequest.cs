@@ -1,11 +1,6 @@
 using MediatR;
+using Microsoft.Extensions.Logging;
 using MiniTrade.Application.Repositories;
-using MiniTrade.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MiniTrade.Application.Features.Commands.Product
 {
@@ -21,6 +16,7 @@ namespace MiniTrade.Application.Features.Commands.Product
     {
       private readonly IProductReadRepository _readRepository;
       private readonly IProductWriteRepository _writeRepository;
+      private readonly ILogger<UpdateProductCommandHandler> _logger;
 
       public UpdateProductCommandHandler(IProductReadRepository readRepository, IProductWriteRepository writeRepository)
       {
@@ -35,6 +31,7 @@ namespace MiniTrade.Application.Features.Commands.Product
         product.Name = request.Name;
         product.Price = request.Price;
         await _writeRepository.SaveAsync();
+        _logger.LogInformation("Product Updated");
         return new()
         { Product = product };
       }

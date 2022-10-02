@@ -1,7 +1,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MiniTrade.Application.Abstractions.Token;
+using MiniTrade.Domain.Entities.Identity;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -16,7 +18,7 @@ namespace MiniTrade.Infastructures.Services.Token
       this.configuration = configuration;
     }
 
-    public Application.Abstractions.Token.Token CreateAccessToken(int second)
+    public Application.Abstractions.Token.Token CreateAccessToken(int second,AppUser user)
     {
       Application.Abstractions.Token.Token token = new();
       ///Security key simetriği alınıyor
@@ -30,7 +32,8 @@ namespace MiniTrade.Infastructures.Services.Token
         issuer: configuration["JWT:Issuer"],
         expires: token.Expiraton,
         notBefore: DateTime.Now,
-        signingCredentials: signingCredentials
+        signingCredentials: signingCredentials,
+        claims:new List<Claim> { new (ClaimTypes.Name,user.NameSurname) }
         );
       //Token oluşturucu sınıfını newleyelim
       JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
