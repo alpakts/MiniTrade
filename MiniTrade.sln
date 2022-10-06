@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniTrade.API", "Presentation\MiniTrade.API\MiniTrade.API.csproj", "{67ECFAC1-7CB5-4232-83DF-8C84899492B9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignalR", "Infastructures\SignalR\SignalR.csproj", "{35BF9823-59BE-4F38-A15F-73E99B1A1C04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{67ECFAC1-7CB5-4232-83DF-8C84899492B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67ECFAC1-7CB5-4232-83DF-8C84899492B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67ECFAC1-7CB5-4232-83DF-8C84899492B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35BF9823-59BE-4F38-A15F-73E99B1A1C04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35BF9823-59BE-4F38-A15F-73E99B1A1C04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35BF9823-59BE-4F38-A15F-73E99B1A1C04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35BF9823-59BE-4F38-A15F-73E99B1A1C04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{2C953654-6588-4718-974A-87DE74F9CA74} = {292E0AD7-EE06-4B2C-8249-B2AA114ABF50}
 		{FC891286-0C87-4070-9650-FF3536E807E8} = {292E0AD7-EE06-4B2C-8249-B2AA114ABF50}
 		{67ECFAC1-7CB5-4232-83DF-8C84899492B9} = {A5851D54-98A0-489C-BBF9-514085EB29C6}
+		{35BF9823-59BE-4F38-A15F-73E99B1A1C04} = {292E0AD7-EE06-4B2C-8249-B2AA114ABF50}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7CB38269-6364-4753-9DFB-7F6C3D3DA4EF}

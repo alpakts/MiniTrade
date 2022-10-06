@@ -14,6 +14,7 @@ using Serilog;
 using Serilog.Context;
 using Serilog.Core;
 using Serilog.Sinks.MSSqlServer;
+using SignalR;
 using System.Collections.ObjectModel;
 using System.Security.Claims;
 using System.Text;
@@ -23,7 +24,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddPersistenceServices();
 builder.Services.AddInfrastructureServices();
 builder.Services.AddApplicationServices();
-
+builder.Services.AddSignalRServices();
 //Generik Storage Altyapısı servisi dahil etme( Generic StorageService Registiration)
 builder.Services.AddStorage<AzureStorage>();
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("https://localhost:4200",
@@ -116,5 +117,5 @@ app.Use(async (context, next) =>
 });
 
 app.MapControllers();
-
+app.MapHubs();
 app.Run();
