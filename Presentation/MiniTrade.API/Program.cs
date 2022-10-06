@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.IdentityModel.Tokens;
 using MiniTrade.API.Configurations.ColumnWriter;
+using MiniTrade.API.Extensions;
 using MiniTrade.Application;
 using MiniTrade.Application.Validators.Products;
 using MiniTrade.Infastructures;
@@ -99,7 +100,7 @@ if (app.Environment.IsDevelopment())
   app.UseSwagger();
   app.UseSwaggerUI();
 }
-
+app.UseAppExceptionHandler(app.Services.GetRequiredService<ILogger<Program>>());
 app.UseStaticFiles();
 app.UseSerilogRequestLogging();
 app.UseHttpLogging();
