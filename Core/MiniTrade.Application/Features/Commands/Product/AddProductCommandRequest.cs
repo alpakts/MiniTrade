@@ -1,19 +1,13 @@
 using MediatR;
 using MiniTrade.Application.Repositories;
-using MiniTrade.Application.ViewModels.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static MiniTrade.Application.Features.Commands.Product.AddProductCommandRequest;
+using MiniTrade.Domain.Entities;
 
 namespace MiniTrade.Application.Features.Commands.Product
 {
-  public  class AddProductCommandRequest:IRequest<AddProductCommandResponse>
+    public  class AddProductCommandRequest:IRequest<AddProductCommandResponse>
   {
-    public VMCreateProduct  CreateProduct { get; set; }
-    public class AddProductCommandHandler : IRequestHandler<AddProductCommandRequest, AddProductCommandResponse>
+        public Domain.Entities.Product? Product { get; set; }
+        public class AddProductCommandHandler : IRequestHandler<AddProductCommandRequest, AddProductCommandResponse>
     {
       readonly IProductWriteRepository _writeRepository;
 
@@ -27,9 +21,9 @@ namespace MiniTrade.Application.Features.Commands.Product
 
         bool result=await _writeRepository.AddAsync(new Domain.Entities.Product()
         {
-          Name = request.CreateProduct.Name,
-          Price = request.CreateProduct.Price,
-          Stock = request.CreateProduct.Stock,
+          Name = request.Product.Name,
+          Price = request.Product.Price,
+          Stock = request.Product.Stock,
           CreateDate = DateTime.Now,
           UpdateDate = DateTime.Now,
 

@@ -12,8 +12,8 @@ using MiniTrade.Persistence.Contexts;
 namespace MiniTrade.Persistence.Migrations
 {
     [DbContext(typeof(MiniTradeAPIDbContext))]
-    [Migration("20221001194528_mig_4")]
-    partial class mig_4
+    [Migration("20221214162309_miq1")]
+    partial class miq1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -236,7 +236,6 @@ namespace MiniTrade.Persistence.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("NameSurname")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")

@@ -27,8 +27,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddSignalRServices();
 //Generik Storage Altyapısı servisi dahil etme( Generic StorageService Registiration)
 builder.Services.AddStorage<AzureStorage>();
-builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.WithOrigins("https://localhost:4200",
-  "http://localhost:4200/").AllowAnyHeader().AllowAnyMethod()));
+builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
 //Seri log servis kayıtı(serilog service reg)
 SqlColumn sqlColumn = new SqlColumn();
 sqlColumn.ColumnName = "UserName";

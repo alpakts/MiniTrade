@@ -1,15 +1,10 @@
 using FluentValidation;
-using MiniTrade.Application.ViewModels.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MiniTrade.Domain.Entities;
 
 //Validasyon işlemleri için fluentvalidation,fluentvalidation asp.net,fluentvalidaitondependecyinejction kütüphanesi yüklenmelidir 
 namespace MiniTrade.Application.Validators.Products
 {
-  public class CreateProductValidator : AbstractValidator<VMCreateProduct>
+    public class CreateProductValidator : AbstractValidator<Product>
   {
     public CreateProductValidator()
     {
